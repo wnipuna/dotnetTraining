@@ -1,0 +1,17 @@
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\bin\Debug\net8.0\ConsoleAppNew.exe
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\bin\Debug\net8.0\ConsoleAppNew.deps.json
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\bin\Debug\net8.0\ConsoleAppNew.runtimeconfig.json
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\bin\Debug\net8.0\ConsoleAppNew.dll
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\bin\Debug\net8.0\ConsoleAppNew.pdb
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.AssemblyInfoInputs.cache
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.AssemblyInfo.cs
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.csproj.CoreCompileInputs.cache
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.dll
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\refint\ConsoleAppNew.dll
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.pdb
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.genruntimeconfig.cache
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ref\ConsoleAppNew.dll
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleAppNew.csproj.AssemblyReference.cache
+C:\Users\nipunaw\source\repos\ConsoleAppNew\ConsoleAppNew\obj\Debug\net8.0\ConsoleA.49413223.Up2Date

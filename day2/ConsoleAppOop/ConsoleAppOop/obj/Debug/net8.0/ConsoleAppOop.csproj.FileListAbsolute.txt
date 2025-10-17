@@ -1,0 +1,14 @@
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\bin\Debug\net8.0\ConsoleAppOop.exe
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\bin\Debug\net8.0\ConsoleAppOop.deps.json
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\bin\Debug\net8.0\ConsoleAppOop.runtimeconfig.json
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\bin\Debug\net8.0\ConsoleAppOop.dll
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\bin\Debug\net8.0\ConsoleAppOop.pdb
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ConsoleAppOop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ConsoleAppOop.AssemblyInfoInputs.cache
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ConsoleAppOop.AssemblyInfo.cs
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ConsoleAppOop.csproj.CoreCompileInputs.cache
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ConsoleAppOop.dll
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\refint\ConsoleAppOop.dll
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ConsoleAppOop.pdb
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ConsoleAppOop.genruntimeconfig.cache
+C:\Users\nipunaw\source\repos\ConsoleAppOop\ConsoleAppOop\obj\Debug\net8.0\ref\ConsoleAppOop.dll

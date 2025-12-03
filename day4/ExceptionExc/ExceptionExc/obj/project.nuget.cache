@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Or2t8SVWO5s=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nipunaw\\source\\repos\\ExceptionExc\\ExceptionExc\\ExceptionExc.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nipunaw\\.nuget\\packages\\serilog\\3.1.1\\serilog.3.1.1.nupkg.sha512",
+    "C:\\Users\\nipunaw\\.nuget\\packages\\serilog.sinks.console\\5.0.1\\serilog.sinks.console.5.0.1.nupkg.sha512",
+    "C:\\Users\\nipunaw\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

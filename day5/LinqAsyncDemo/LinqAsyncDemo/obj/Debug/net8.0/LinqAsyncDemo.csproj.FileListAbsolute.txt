@@ -1,0 +1,14 @@
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\bin\Debug\net8.0\LinqAsyncDemo.exe
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\bin\Debug\net8.0\LinqAsyncDemo.deps.json
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\bin\Debug\net8.0\LinqAsyncDemo.runtimeconfig.json
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\bin\Debug\net8.0\LinqAsyncDemo.dll
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\bin\Debug\net8.0\LinqAsyncDemo.pdb
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\LinqAsyncDemo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\LinqAsyncDemo.AssemblyInfoInputs.cache
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\LinqAsyncDemo.AssemblyInfo.cs
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\LinqAsyncDemo.csproj.CoreCompileInputs.cache
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\LinqAsyncDemo.dll
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\refint\LinqAsyncDemo.dll
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\LinqAsyncDemo.pdb
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\LinqAsyncDemo.genruntimeconfig.cache
+C:\Users\nipunaw\source\repos\LinqAsyncDemo\LinqAsyncDemo\obj\Debug\net8.0\ref\LinqAsyncDemo.dll

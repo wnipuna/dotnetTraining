@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee SignalR Client</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .status-bar {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef4444;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.connected {
+            background: #10b981;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .connection-id {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .notifications {
+            grid-column: 1 / -1;
+        }
+
+        .notification-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            background: #f9fafb;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification-item.added {
+            border-left-color: #10b981;
+        }
+
+        .notification-item.updated {
+            border-left-color: #f59e0b;
+        }
+
+        .notification-item.deleted {
+            border-left-color: #ef4444;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .notification-type {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .notification-time {
+            font-size: 0.85em;
+            color: #6b7280;
+        }
+
+        .notification-content {
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .employee-details {
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+
+        .employee-details strong {
+            color: #667eea;
+        }
+
+        .clear-btn {
+            background: #ef4444;
+            margin-top: 15px;
+        }
+
+        .clear-btn:hover {
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔔 Employee Real-Time Notifications</h1>
+        
+        <div class="status-bar">
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Disconnected</span>
+            </div>
+            <div class="connection-id" id="connectionId">Connection ID: N/A</div>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>➕ Add New Employee</h2>
+                <form id="addEmployeeForm">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department:</label>
+                        <input type="text" id="department" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" min="18" max="65" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="salary">Salary:</label>
+                        <input type="number" id="salary" min="0" step="0.01" required>
+                    </div>
+                    <button type="submit">Add Employee</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📊 Connection Info</h2>
+                <p style="color: #666; line-height: 1.8;">
+                    <strong>Hub URL:</strong> https://localhost:7069/employeeHub<br>
+                    <strong>Status:</strong> <span id="connectionStatus">Disconnected</span><br>
+                    <strong>Transport:</strong> <span id="transportType">N/A</span><br>
+                    <strong>Total Notifications:</strong> <span id="notificationCount">0</span>
+                </p>
+                <div style="margin-top: 20px; padding: 15px; background: #fef3c7; border-radius: 5px; border-left: 4px solid #f59e0b;">
+                    <strong style="color: #92400e;">ℹ️ How it works:</strong>
+                    <p style="color: #78350f; margin-top: 8px; font-size: 0.9em;">
+                        This client connects to the SignalR hub and receives real-time notifications when employees are added, updated, or deleted through the API.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card notifications">
+                <h2>📬 Real-Time Notifications</h2>
+                <div class="notification-list" id="notificationList">
+                    <p style="color: #9ca3af; text-align: center; padding: 20px;">
+                        Waiting for notifications...
+                    </p>
+                </div>
+                <button class="clear-btn" onclick="clearNotifications()">Clear All Notifications</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        let connection;
+        let notificationCount = 0;
+
+        async function startConnection() {
+            connection = new signalR.HubConnectionBuilder()
+                .withUrl("https://localhost:7069/employeeHub")
+                .withAutomaticReconnect()
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            connection.on("Connected", (connectionId) => {
+                console.log("Connected with ID:", connectionId);
+                document.getElementById("connectionId").textContent = `Connection ID: ${connectionId}`;
+                updateConnectionStatus(true);
+            });
+
+            connection.on("EmployeeAdded", (employee) => {
+                addNotification("added", "Employee Added", employee);
+            });
+
+            connection.on("EmployeeUpdated", (employee) => {
+                addNotification("updated", "Employee Updated", employee);
+            });
+
+            connection.on("EmployeeDeleted", (employeeId) => {
+                addNotification("deleted", "Employee Deleted", { Id: employeeId });
+            });
+
+            connection.onreconnecting(() => {
+                updateConnectionStatus(false);
+                addSystemNotification("Reconnecting...");
+            });
+
+            connection.onreconnected((connectionId) => {
+                updateConnectionStatus(true);
+                addSystemNotification("Reconnected successfully!");
+            });
+
+            connection.onclose(() => {
+                updateConnectionStatus(false);
+                addSystemNotification("Connection closed. Attempting to reconnect...");
+                setTimeout(() => startConnection(), 5000);
+            });
+
+            try {
+                await connection.start();
+                console.log("SignalR Connected!");
+                updateConnectionStatus(true);
+                document.getElementById("transportType").textContent = connection.connection.transport.name;
+            } catch (err) {
+                console.error("Error connecting to SignalR:", err);
+                updateConnectionStatus(false);
+                setTimeout(() => startConnection(), 5000);
+            }
+        }
+
+        function updateConnectionStatus(isConnected) {
+            const statusDot = document.getElementById("statusDot");
+            const statusText = document.getElementById("statusText");
+            const connectionStatus = document.getElementById("connectionStatus");
+
+            if (isConnected) {
+                statusDot.classList.add("connected");
+                statusText.textContent = "Connected";
+                connectionStatus.textContent = "Connected";
+                connectionStatus.style.color = "#10b981";
+            } else {
+                statusDot.classList.remove("connected");
+                statusText.textContent = "Disconnected";
+                connectionStatus.textContent = "Disconnected";
+                connectionStatus.style.color = "#ef4444";
+            }
+        }
+
+        function addNotification(type, title, data) {
+            notificationCount++;
+            document.getElementById("notificationCount").textContent = notificationCount;
+
+            const notificationList = document.getElementById("notificationList");
+            
+            if (notificationList.querySelector("p")) {
+                notificationList.innerHTML = "";
+            }
+
+            const notificationItem = document.createElement("div");
+            notificationItem.className = `notification-item ${type}`;
+
+            const now = new Date().toLocaleTimeString();
+            
+            let content = "";
+            if (type === "deleted") {
+                content = `Employee with ID ${data.Id} has been deleted.`;
+            } else {
+                content = `
+                    <div class="employee-details">
+                        <strong>ID:</strong> ${data.id || data.Id}<br>
+                        <strong>Name:</strong> ${data.name || data.Name || "N/A"}<br>
+                        <strong>Email:</strong> ${data.email || data.Email || "N/A"}<br>
+                        <strong>Department:</strong> ${data.department || data.Department || "N/A"}<br>
+                        <strong>Age:</strong> ${data.age || data.Age || "N/A"}<br>
+                        <strong>Salary:</strong> $${data.salary || data.Salary || "N/A"}
+                    </div>
+                `;
+            }
+
+            notificationItem.innerHTML = `
+                <div class="notification-header">
+                    <span class="notification-type">${title}</span>
+                    <span class="notification-time">${now}</span>
+                </div>
+                <div class="notification-content">
+                    ${content}
+                </div>
+            `;
+
+            notificationList.insertBefore(notificationItem, notificationList.firstChild);
+        }
+
+        function addSystemNotification(message) {
+            const notificationList = document.getElementById("notificationList");
+            
+            if (notificationList.querySelector("p")) {
+                notificationList.innerHTML = "";
+            }
+
+            const notificationItem = document.createElement("div");
+            notificationItem.className = "notification-item";
+            notificationItem.innerHTML = `
+                <div class="notification-header">
+                    <span class="notification-type">System</span>
+                    <span class="notification-time">${new Date().toLocaleTimeString()}</span>
+                </div>
+                <div class="notification-content">${message}</div>
+            `;
+
+            notificationList.insertBefore(notificationItem, notificationList.firstChild);
+        }
+
+        function clearNotifications() {
+            const notificationList = document.getElementById("notificationList");
+            notificationList.innerHTML = `
+                <p style="color: #9ca3af; text-align: center; padding: 20px;">
+                    Waiting for notifications...
+                </p>
+            `;
+            notificationCount = 0;
+            document.getElementById("notificationCount").textContent = "0";
+        }
+
+        document.getElementById("addEmployeeForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const employee = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                department: document.getElementById("department").value,
+                age: parseInt(document.getElementById("age").value),
+                salary: parseFloat(document.getElementById("salary").value)
+            };
+
+            try {
+                const response = await fetch("https://localhost:7069/api/employee", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(employee)
+                });
+
+                if (response.ok) {
+                    document.getElementById("addEmployeeForm").reset();
+                    addSystemNotification("Employee added successfully via API!");
+                } else {
+                    const error = await response.json();
+                    alert("Error adding employee: " + JSON.stringify(error));
+                }
+            } catch (err) {
+                console.error("Error:", err);
+                alert("Error adding employee. Make sure the API is running.");
+            }
+        });
+
+        startConnection();
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+### Get All Employees (200 OK)
+GET https://localhost:7069/api/employee
+Accept: application/json
+
+### Get Employee by ID (200 OK)
+GET https://localhost:7069/api/employee/1
+Accept: application/json
+
+### Get Employee by Invalid ID (404 Not Found)
+GET https://localhost:7069/api/employee/999
+Accept: application/json
+
+### Create New Employee (201 Created)
+POST https://localhost:7069/api/employee
+Content-Type: application/json
+
+{
+  "name": "Alice Williams",
+  "email": "alice.williams@example.com",
+  "department": "Marketing",
+  "age": 29,
+  "salary": 58000
+}
+
+### Create Employee with Invalid Data (400 Bad Request)
+POST https://localhost:7069/api/employee
+Content-Type: application/json
+
+{
+  "name": "A",
+  "email": "invalid-email",
+  "department": "",
+  "age": 15,
+  "salary": -1000
+}
+
+### Update Employee (200 OK)
+PUT https://localhost:7069/api/employee/1
+Content-Type: application/json
+
+{
+  "name": "John Doe Updated",
+  "email": "john.doe.updated@example.com",
+  "department": "IT Management",
+  "age": 31,
+  "salary": 65000
+}
+
+### Update Non-Existent Employee (404 Not Found)
+PUT https://localhost:7069/api/employee/999
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "department": "Test",
+  "age": 25,
+  "salary": 50000
+}
+
+### Delete Employee (200 OK)
+DELETE https://localhost:7069/api/employee/3
+
+### Delete Non-Existent Employee (404 Not Found)
+DELETE https://localhost:7069/api/employee/999

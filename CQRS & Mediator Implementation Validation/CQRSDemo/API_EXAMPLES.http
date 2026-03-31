@@ -1,0 +1,204 @@
+### CQRS Demo API Examples
+### Use this file with VS Code REST Client extension or similar tools
+
+@baseUrl = https://localhost:7001
+@contentType = application/json
+
+### 1. Get All Products (Query - Read Operation)
+GET {{baseUrl}}/api/products
+Accept: application/json
+
+###
+
+### 2. Get Product by ID (Query - Read Operation)
+GET {{baseUrl}}/api/products/1
+Accept: application/json
+
+###
+
+### 3. Create Product - Valid (Command - Write Operation)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Mechanical Keyboard",
+  "description": "RGB mechanical gaming keyboard with Cherry MX switches",
+  "price": 129.99,
+  "stock": 50
+}
+
+###
+
+### 4. Create Product - Another Valid Example
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "USB-C Hub",
+  "description": "7-in-1 USB-C hub with HDMI and ethernet",
+  "price": 45.50,
+  "stock": 100
+}
+
+###
+
+### 5. Create Product - INVALID (Empty Name)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "",
+  "description": "This should fail validation",
+  "price": 99.99,
+  "stock": 10
+}
+
+###
+
+### 6. Create Product - INVALID (Negative Price)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Test Product",
+  "description": "This should fail validation",
+  "price": -50.00,
+  "stock": 10
+}
+
+###
+
+### 7. Create Product - INVALID (Multiple Validation Errors)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "",
+  "description": "",
+  "price": -10,
+  "stock": -5
+}
+
+###
+
+### 8. Create Product - INVALID (Name Too Long)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "This is a very long product name that exceeds the maximum allowed length of 100 characters and should trigger a validation error",
+  "description": "Test description",
+  "price": 99.99,
+  "stock": 10
+}
+
+###
+
+### 9. Update Product - Valid (Command - Write Operation)
+PUT {{baseUrl}}/api/products/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Updated Laptop Pro",
+  "description": "Ultra high-performance laptop with latest specs",
+  "price": 1599.99,
+  "stock": 8
+}
+
+###
+
+### 10. Update Product - INVALID (Price = 0)
+PUT {{baseUrl}}/api/products/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Test Product",
+  "description": "This should fail",
+  "price": 0,
+  "stock": 10
+}
+
+###
+
+### 11. Update Non-Existent Product
+PUT {{baseUrl}}/api/products/999
+Content-Type: {{contentType}}
+
+{
+  "name": "Non-existent Product",
+  "description": "This product doesn't exist",
+  "price": 99.99,
+  "stock": 10
+}
+
+###
+
+### 12. Delete Product (Command - Write Operation)
+DELETE {{baseUrl}}/api/products/2
+
+###
+
+### 13. Delete Non-Existent Product
+DELETE {{baseUrl}}/api/products/999
+
+###
+
+### 14. Get Deleted Product (Should return 404)
+GET {{baseUrl}}/api/products/2
+Accept: application/json
+
+###
+
+### 15. Create Product with Edge Case - Zero Stock (Valid)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Out of Stock Item",
+  "description": "This item is currently out of stock",
+  "price": 29.99,
+  "stock": 0
+}
+
+###
+
+### 16. Create Product - Minimum Valid Values
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "A",
+  "description": "B",
+  "price": 0.01,
+  "stock": 0
+}
+
+###
+
+### 17. Create Product - Maximum Description Length (500 chars - Valid)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "Test Product",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
+  "price": 99.99,
+  "stock": 10
+}
+
+###
+
+### 18. Get All Products After Operations
+GET {{baseUrl}}/api/products
+Accept: application/json
+
+###
+
+### Notes:
+### - Replace {{baseUrl}} with your actual API URL (check console output when running dotnet run)
+### - Valid requests should return 200 OK, 201 Created, or 204 No Content
+### - Invalid requests should return 400 Bad Request with validation errors
+### - Non-existent resources should return 404 Not Found
+### - All commands go through FluentValidation before reaching handlers
+### - All requests are dispatched through MediatR
+### - Commands modify state, Queries only read data

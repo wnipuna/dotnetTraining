@@ -11,6 +11,10 @@ public class OrderItem : Entity
     public Money UnitPrice { get; private set; }
     public Money TotalPrice { get; private set; }
 
+    private OrderItem() : base()
+    {
+    }
+
     private OrderItem(Guid productId, string productName, int quantity, Money unitPrice)
         : base()
     {

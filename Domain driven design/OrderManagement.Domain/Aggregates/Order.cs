@@ -21,6 +21,10 @@ public class Order : AggregateRoot
 
     public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
+    private Order() : base()
+    {
+    }
+
     private Order(
         Guid customerId,
         string customerName,
